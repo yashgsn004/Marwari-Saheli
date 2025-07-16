@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hearts With Fingers - Handmade & Homemade Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .product-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-primary {
+            @apply bg-orange-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-orange-700 transition duration-300;
+        }
+        .btn-secondary {
+            @apply bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300;
+        }
+        /* Slider specific styles */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: #f97316; /* orange-500 */
+        }
+        .mainlogo{
+            max-width: 150px;
+            max-height: 130px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4">
+        <div class="container flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl font-bold text-orange-600"><img src="./image/mainlogo.png" class="mainlogo"></a>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="products.html" class="text-gray-700 hover:text-orange-600 font-medium">Food</a>
+                <a href="#" class="text-gray-700 hover:text-orange-600 font-medium">Fashion</a>
+                <a href="#" class="text-gray-700 hover:text-orange-600 font-medium">Beauty</a>
+                <a href="blog.html" class="text-gray-700 hover:text-orange-600 font-medium">Blog</a>
+                <a href="contact.html" class="text-gray-700 hover:text-orange-600 font-medium">Contact</a>
+            </nav>
+
+            <!-- Search, Cart, and Login/Signup Icons -->
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-600 hover:text-orange-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+                <button class="text-gray-600 hover:text-orange-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 0a2 2 0 100 4 2 2 0 000-4z"></path></svg>
+                </button>
+                <a href="#" class="text-gray-600 hover:text-orange-600 font-medium text-sm md:text-base">Log in or Sign up</a>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 hover:text-orange-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Second Navigation Bar (Subcategories) -->
+    <nav class="bg-gray-100 shadow-sm py-3">
+        <div class="container flex justify-center items-center space-x-6 overflow-x-auto whitespace-nowrap">
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Honey</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Ghee</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Pickle</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Edible Oil</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Spices</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Pulses</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Jams</a>
+            <a href="#" class="text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1 rounded-lg hover:bg-gray-200 transition duration-300">Snacks</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section with Image Slider -->
+        <section class="bg-orange-100 py-0"> <!-- Changed py-16 to py-0 -->
+            <div class="container flex flex-col items-center">
+                <div class="w-full">
+                    <div class="slider-container">
+                        <div class="slides" id="hero-slides">
+                            <div class="slide"><img src="./image/product2.jpg" alt="Group"></div>
+                            <div class="slide"><img src="./image/Spices.jpeg" alt="Spices"></div>
+                            <div class="slide"><img src="./image/Ghee.jpeg" alt="Ghee"></div>
+                            <div class="slide"><img src="./image/prd1.jpg" alt="Red Chilli"></div>
+                            <div class="slide"><img src="./image/Biscuit.jpeg" alt="Biscuit"></div>
+                        </div>
+                        <div class="slider-dots" id="slider-dots">
+                            <!-- Dots will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Handmade Treasures Just For You Section -->
+        <section class="py-16 bg-white">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Handmade Treasures Just For You</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Category Card 1 -->
+                    <a href="#" class="block group bg-gray-50 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300">
+                        <img src="./image/Food.jpeg" alt="Food Category" class="w-full h-40 object-cover rounded-md mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-orange-600">Food</h3>
+                    </a>
+                    <!-- Category Card 2 -->
+                    <a href="#" class="block group bg-gray-50 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300">
+                        <img src="./image/Fashion.jpeg" alt="Fashion Category" class="w-full h-40 object-cover rounded-md mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-orange-600">Fashion</h3>
+                    </a>
+                    <!-- Category Card 3 -->
+                    <a href="#" class="block group bg-gray-50 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300">
+                        <img src="./image/Beauty.jpeg" alt="Beauty Category" class="w-full h-40 object-cover rounded-md mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-orange-600">Beauty</h3>
+                    </a>
+                    <!-- Category Card 4 -->
+                    <a href="#" class="block group bg-gray-50 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300">
+                        <img src="./image/Decor.jpeg" alt="Home Decor Category" class="w-full h-40 object-cover rounded-md mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-orange-600">Home Decor</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Selling Products Section -->
+        <section class="py-16 bg-white">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Best Selling Homemade & Handmade Products</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Product Card 1 -->
+                    <div class="product-card bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <img src="./image/Ghee.jpeg" alt="Product Name" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Organic Ghee</h3>
+                        <p class="text-gray-600 mb-2">Pure & Natural</p>
+                        <div class="text-orange-600 font-bold text-lg mb-4">$12.99</div>
+                        <button class="btn-primary w-full">Add to Cart</button>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="product-card bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <img src="./image/Jeera.jpeg" alt="Product Name" class="w-full h-48 object-contain rounded-md mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Handprocessed Jeera</h3>
+                        <p class="text-gray-600 mb-2">Lavender Scent</p>
+                        <div class="text-orange-600 font-bold text-lg mb-4">$8.50</div>
+                        <button class="btn-primary w-full">Add to Cart</button>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div class="product-card bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <img src="./image/Methi.jpeg" alt="Product Name" class="w-full h-48 object-contain rounded-md mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Artisan Pan Methi</h3>
+                        <p class="text-gray-600 mb-2">Spicy Mango</p>
+                        <div class="text-orange-600 font-bold text-lg mb-4">$9.75</div>
+                        <button class="btn-primary w-full">Add to Cart</button>
+                    </div>
+                    <!-- Product Card 4 -->
+                    <div class="product-card bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <img src="./image/Biscuit.jpeg" alt="Product Name" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Nutrient Rich Biscuits</h3>
+                        <p class="text-gray-600 mb-2">Hand-stitched</p>
+                        <div class="text-orange-600 font-bold text-lg mb-4">$45.00</div>
+                        <button class="btn-primary w-full">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offers Section -->
+        <section class="py-16 bg-orange-50">
+            <div class="container text-center">
+                <h2 class="text-3xl font-bold mb-10 text-gray-800">Special Offers on Most-Loved Products</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Offer Card 1 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col md:flex-row items-center">
+                        <img src="./image/Biscuit.jpeg" alt="Offer Product" class="w-32 h-32 object-cover rounded-full mb-4 md:mb-0 md:mr-6">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Freshly Baked Cookies</h3>
+                            <p class="text-gray-600 mb-3">Get 20% off on your first order!</p>
+                            <span class="text-xl font-bold text-orange-600 line-through mr-2">$10.00</span>
+                            <span class="text-2xl font-bold text-red-600">$8.00</span>
+                            <button class="btn-primary mt-4">View Offer</button>
+                        </div>
+                    </div>
+                    <!-- Offer Card 2 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md flex flex-col md:flex-row items-center">
+                        <img src="./image/Decor.jpeg" alt="Offer Product" class="w-32 h-32 object-cover rounded-full mb-4 md:mb-0 md:mr-6">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Handmade Mini Fountain</h3>
+                            <p class="text-gray-600 mb-3">Limited time offer: Buy one, get one 50% off!</p>
+                            <span class="text-xl font-bold text-orange-600 line-through mr-2">$30.00</span>
+                            <span class="text-2xl font-bold text-red-600">$22.50</span>
+                            <button class="btn-primary mt-4">View Offer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Reviews Section -->
+        <section class="py-16 bg-white">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">What Our Customers Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Review Card 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <p class="text-gray-700 italic mb-4">"Absolutely love the quality of products! Everything feels so authentic and made with care."</p>
+                        <p class="font-semibold text-orange-600">- Jane Doe</p>
+                    </div>
+                    <!-- Review Card 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <p class="text-gray-700 italic mb-4">"The customer service is outstanding. Fast shipping and beautiful packaging."</p>
+                        <p class="font-semibold text-orange-600">- John Smith</p>
+                    </div>
+                    <!-- Review Card 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                        <p class="text-gray-700 italic mb-4">"Found unique gifts for my family. Highly recommend Hearts With Fingers!"</p>
+                        <p class="font-semibold text-orange-600">- Emily White</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section class="py-16 bg-orange-50">
+            <div class="container text-center">
+                <h2 class="text-3xl font-bold mb-10 text-gray-800">From Our Blog</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Blog Post 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <img src="./image/prd1.jpg" alt="Blog Post Image" class="w-full h-76 object-contain rounded-md mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Meet Our Artisans: The Story of Meena</h3>
+                        <p class="text-gray-600 mb-4">Discover the inspiring journey of Meena, who crafts beautiful traditional textiles with passion.</p>
+                        <a href="blog.html" class="text-orange-600 hover:underline font-medium">Read More &rarr;</a>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <img src="./image/product3.jpg" alt="Blog Post Image" class="w-full h-76 object-contain rounded-md mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">The Benefits of Organic Skincare</h3>
+                        <p class="text-gray-600 mb-4">Learn why choosing organic and handmade beauty products is better for your skin and the environment.</p>
+                        <a href="blog.html" class="text-orange-600 hover:underline font-medium">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- About Us -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Marwari Saheli</h3>
+                <p class="text-gray-400 text-sm">
+                    Connecting you with authentic handmade and homemade products, crafted with love and care by talented artisans.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="aboutus.html" class="text-gray-400 hover:text-orange-600 transition duration-300">Our Story</a></li>
+                    <li><a href="blog.html" class="text-gray-400 hover:text-orange-600 transition duration-300">Blog</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-orange-600 transition duration-300">FAQs</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-orange-600 transition duration-300">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Customer Service</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-orange-600 transition duration-300">Shipping & Returns</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-orange-600 transition duration-300">Terms of Service</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-orange-600 transition duration-300">Privacy Policy</a></li>
+                    <li><a href="contact.html" class="text-gray-400 hover:text-orange-600 transition duration-300">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Stay Connected -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Stay Connected</h3>
+                <p class="text-gray-400 text-sm mb-4">Follow us on social media for updates and new arrivals!</p>
+                <div class="flex space-x-4">
+                    <!-- Social Media Icons (Placeholder) -->
+                    <a href="#" class="text-gray-400 hover:text-orange-600">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.007-.532A8.318 8.318 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012 10.77v.058a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.277a11.616 11.616 0 006.29 1.974c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.007-.532A8.318 8.318 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012 10.77v.058a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.277a11.616 11.616 0 006.29 1.974z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-orange-600">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.829.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.09.39-1.984 1.029-2.682-.107-.253-.446-1.272.097-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.701.114 2.514.321 1.902-1.296 2.747-1.026 2.747-1.026.546 1.379.207 2.398.097 2.65.64.698 1.028 1.592 1.028 2.682 0 3.84-2.339 4.69-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2Z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-orange-600">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.829.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.09.39-1.984 1.029-2.682-.107-.253-.446-1.272.097-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.701.114 2.514.321 1.902-1.296 2.747-1.026 2.747-1.026.546 1.379.207 2.398.097 2.65.64.698 1.028 1.592 1.028 2.682 0 3.84-2.339 4.69-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2Z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center text-gray-500 text-sm mt-8 border-t border-gray-700 pt-6">
+            &copy; 2023 Hearts With Fingers. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('hero-slides');
+            const dotsContainer = document.getElementById('slider-dots');
+            const slides = slidesContainer.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentSlide = 0;
+            let slideInterval;
+
+            // Create dots for each slide
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            function showSlide(index) {
+                // Wrap around to the first/last slide if index is out of bounds
+                if (index >= totalSlides) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = totalSlides - 1;
+                } else {
+                    currentSlide = index;
+                }
+
+                // Move the slides container to show the current slide
+                slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                // Update active dot
+                dots.forEach((dot, i) => {
+                    if (i === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function goToSlide(index) {
+                showSlide(index);
+                resetInterval(); // Reset interval on manual navigation
+            }
+
+            function startSlider() {
+                slideInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startSlider();
+            }
+
+            // Initial display
+            showSlide(0);
+            startSlider();
+        });
+    </script>
+</body>
+</html>
